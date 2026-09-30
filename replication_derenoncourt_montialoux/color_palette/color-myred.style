@@ -1,0 +1,6 @@
+*! version 1.0.1  03Mar2018
+
+* label "myred"
+label resource "COLOR-MYRED"
+
+set rgb "193 64 61"

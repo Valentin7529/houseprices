@@ -50,13 +50,31 @@ fourni dans le package. Sinon, écrire aux auteurs.
   classwkr wkswork2 hrswork2 gq cpi99` + une variable de poids nommée `weight` (= `perwt` IPUMS, à renommer). Renommer en `census_raw_1940_2017.dta`.
   Les extraits refaits aujourd'hui peuvent différer légèrement (IPUMS révise ses codes) → petits écarts possibles.
 
+## Etat des données (reçues / manquantes)
+
+| Fichier | Statut |
+|---|---|
+| `color_palette/*.style` (5 couleurs) | ✅ dans le repo |
+| `bls_industry_reports.dta`, `bls_schools_1968_1969.dta`, `bls_hospitals_1966_1969.dta`, `bls_iwr_wage_effect.dta` | ✅ reçus, variables conformes au code (à mettre dans `data/raw/`, sans le suffixe `_1`) |
+| `spd_cpi_u_rs_annual.dta` | ❌ manquant — bloque 4a, 1d, 1j |
+| `march_cps_1962_2017.dta` | ❌ manquant — bloque toute la partie CPS |
+| `census_raw_1940_2017.dta` | ❌ manquant — bloque 1j et les tableaux Census du 2a |
+| `VZ_state_monthly.dta`, `spd_mw_series_men/women_monthly.xlsx`, `pop_by_state.xlsx` | ❌ manquants — base salaire minimum (1e-1h) |
+| `spd_industry_codes.xlsx`, `spd_states_codes.xlsx`, `spd_crosswalk_states_cps_cepr_org_statefips.xlsx`, `crosswalk_state_regions.dta` | ❌ manquants — crosswalks (1a-1c, 1e) |
+| `data/output/ssa_unemployment_1962_1966.dta` | ❌ manquant — 3b |
+
+Dès que `spd_cpi_u_rs_annual.dta` est là, `01_run_bls_only.do` fait tourner la partie BLS (1k, 2b, 4a).
+Note : `1k` tire des salaires aléatoires (`runiform`) sans `set seed` propre ; lancé seul, les chiffres de bunching
+peuvent varier très légèrement d'une exécution à l'autre (dans la chaîne complète, le `set seed` du 1d le rend
+reproductible).
+
 ## 3. Lancer
 
 1. Dézipper le package, placer `00_setup_and_run.do` à la racine `replication/`.
 2. Modifier **une seule ligne** : `global path "…/replication"`.
 3. `do 00_setup_and_run.do` — il installe les packages SSC (y compris `coefplot` et `blindschemes`, oubliés dans
    la liste du master original), les fonds de carte `maptile`, la palette de couleurs, crée les dossiers manquants
-   (`tables/bls_calculations/temp/Input|Output`, dont le `mkdir` est commenté dans `1k`), vérifie les données puis
+   (`data/output`, `figures`, `tables`), vérifie les données puis
    exécute les 20 do-files dans l'ordre du `0_master.do` avec un log.
 
 Temps de calcul : le 3b (≈ 4 000 lignes de `reghdfe`) est de loin le plus long ; compter plusieurs heures au total.

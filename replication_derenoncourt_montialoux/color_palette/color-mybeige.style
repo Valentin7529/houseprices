@@ -1,0 +1,6 @@
+*! version 1.0.1  19Mar2018
+
+* label "mybeige"
+label resource "COLOR-MYBEIGE"
+
+set rgb "167 156 147"

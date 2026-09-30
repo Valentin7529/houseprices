@@ -1,0 +1,6 @@
+*! version 1.0.1  19nov2018
+
+* label "myarticblue"
+label resource "COLOR-MYARTICBLUE"
+
+set rgb "2 148 165"

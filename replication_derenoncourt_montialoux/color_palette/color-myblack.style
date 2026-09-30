@@ -1,0 +1,6 @@
+*! version 1.0.1  19Mar2018
+
+* label "myblack"
+label resource "COLOR-MYBLACK"
+
+set rgb "4 6 15"

@@ -1,0 +1,6 @@
+*! version 1.0.1  19mar2018
+
+* label "mydeepblue"
+label resource "COLOR-MYDEEPBLUE"
+
+set rgb "3 53 62"
