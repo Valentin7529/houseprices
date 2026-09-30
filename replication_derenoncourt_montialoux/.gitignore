@@ -1,0 +1,9 @@
+# Données et sorties : trop lourdes / licence IPUMS -> restent en local
+data/raw/*
+data/output/*
+!data/raw/.gitkeep
+!data/output/.gitkeep
+figures/*
+tables/*
+*.smcl
+*.log
